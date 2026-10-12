@@ -12,7 +12,7 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1518495973542-4542c06a5843') no-repeat center center fixed;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1518495973542-4542c06a5843') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             height: 100vh;
@@ -23,7 +23,7 @@
             overflow: hidden;
         }
 
-        /* Loading Screen State */
+        /* Initial Loading Screen */
         #loading-screen {
             display: flex;
             flex-direction: column;
@@ -36,28 +36,14 @@
             z-index: 10;
             transition: opacity 0.5s ease;
         }
-        .logo-placeholder {
-            width: 180px;
-            height: 90px;
-            margin-bottom: 30px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50" fill="white"><path d="M25,5 C10,5 5,20 5,25 C5,30 10,45 25,45 C35,45 40,35 45,25 C40,15 35,5 25,5 Z M75,5 C90,5 95,20 95,25 C95,30 90,45 75,45 C65,45 60,35 55,25 C60,15 65,5 75,5 Z"/></svg>') no-repeat center;
-            background-size: contain;
-        }
         .loading-text {
             font-size: 15px;
             letter-spacing: 2px;
             font-weight: 500;
             text-transform: uppercase;
         }
-        .loading-url {
-            position: absolute;
-            bottom: 40px;
-            font-size: 13px;
-            color: #aaaaaa;
-            letter-spacing: 0.5px;
-        }
 
-        /* Main Content State */
+        /* Main Verified Screen */
         #main-screen {
             display: none;
             max-width: 340px;
@@ -109,14 +95,12 @@
 </head>
 <body>
 
-    <!-- 1. Checking Authenticity Loading Screen -->
+    <!-- Step 1: Loading sequence -->
     <div id="loading-screen">
-        <div class="logo-placeholder"></div>
         <div class="loading-text">Checking Authenticity</div>
-        <div class="loading-url">mooseknuckles.io</div>
     </div>
 
-    <!-- 2. Result Screen matching your screenshot -->
+    <!-- Step 2: Exact matching result screen -->
     <div id="main-screen">
         <h1>Good news! Your item is 100% authentic.</h1>
         <p>Would you like to register your product so we can track and streamline future warranty claims?</p>
@@ -132,7 +116,7 @@
     </div>
 
     <script>
-        // Simulate the 2-second loading animation seen in the video before revealing the page
+        // Transition from checking screen to success screen after 2 seconds
         setTimeout(() => {
             const loadingScreen = document.getElementById('loading-screen');
             const mainScreen = document.getElementById('main-screen');
@@ -146,14 +130,14 @@
 
         function handleChoice(choice) {
             if (choice === 'yes') {
-                alert("Redirecting to product registration form...");
+                alert("Thank you for registering!");
             } else {
-                alert("Thank you. Session closed.");
+                alert("Session complete.");
             }
         }
 
         function toggleInfo() {
-            alert("Item Details:\nModel: Bunny Hoodie\nAuthenticity Chip ID: MK-8829104");
+            alert("Item Status: Verified Authentic");
         }
     </script>
 
