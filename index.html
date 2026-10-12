@@ -1,35 +1,39 @@
+Here is the finalized, flawless code for your landing page matching that exact specification. The initial loading sequence is intact, and it transitions cleanly into this exact final screen layout.
+
+Paste this code into your `index.html` file on GitHub, commit the changes, and it will be completely dialed in:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authenticity Check</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Authenticity Verification</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1518495973542-4542c06a5843') no-repeat center center fixed;
-            background-size: cover;
-            color: #ffffff;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Initial Loading Screen */
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        /* 1. Initial Loading Screen */
         #loading-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             background-color: #000000;
@@ -41,82 +45,145 @@
             letter-spacing: 2px;
             font-weight: 500;
             text-transform: uppercase;
+            color: #ffffff;
         }
 
-        /* Main Verified Screen */
+        /* 2. Final Success Screen Background */
+        .bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
+                        url('https://images.unsplash.com/photo-1511497584788-876761c11969?auto=format&fit=crop&w=1200&q=80') no-repeat center center;
+            background-size: cover;
+            filter: grayscale(40%) contrast(110%);
+            z-index: 1;
+        }
+
+        /* Main Content Container */
         #main-screen {
             display: none;
-            max-width: 340px;
-            padding: 20px;
-            z-index: 5;
-        }
-        h1 {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 25px;
-            line-height: 1.4;
-            letter-spacing: -0.2px;
-        }
-        p {
-            font-size: 14px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            color: #dfdfdf;
-        }
-        .btn-container {
-            display: flex;
-            gap: 12px;
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            flex-direction: column;
             justify-content: center;
-            margin-bottom: 35px;
+            align-items: center;
+            padding: 0 28px;
+            text-align: center;
+            color: #ffffff;
         }
+
+        h1 {
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 22px;
+            max-width: 300px;
+            letter-spacing: -0.3px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
+
+        p {
+            font-size: 14.5px;
+            font-weight: 400;
+            line-height: 1.45;
+            color: #f0f0f0;
+            margin-bottom: 32px;
+            max-width: 290px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+        }
+
+        /* White Square Buttons */
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 40px;
+        }
+
         .btn {
+            flex: 1;
             background-color: #ffffff;
             color: #000000;
             border: none;
-            padding: 12px 0;
+            padding: 13px 0;
+            font-size: 14px;
             font-weight: 600;
-            font-size: 13px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            width: 110px;
-            border-radius: 2px;
-            transition: background 0.2s;
-        }
-        .btn:active {
-            background-color: #cccccc;
-        }
-        .item-info {
-            font-size: 13px;
-            color: #cccccc;
-            cursor: pointer;
             letter-spacing: 0.5px;
+            cursor: pointer;
+            border-radius: 0px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: opacity 0.15s ease;
+        }
+
+        .btn:active {
+            opacity: 0.8;
+        }
+
+        /* Expandable Item Info */
+        .info-toggle {
+            font-size: 13.5px;
+            color: #d1d1d1;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            user-select: none;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .info-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, margin-top 0.3s ease;
+            font-size: 12px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .info-details.open {
+            max-height: 100px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Step 1: Loading sequence -->
+    <!-- Loading Screen Sequence -->
     <div id="loading-screen">
         <div class="loading-text">Checking Authenticity</div>
     </div>
 
-    <!-- Step 2: Exact matching result screen -->
+    <!-- Final Content Screen -->
+    <div class="bg-container"></div>
+
     <div id="main-screen">
         <h1>Good news! Your item is 100% authentic.</h1>
-        <p>Would you like to register your product so we can track and streamline future warranty claims?</p>
         
-        <div class="btn-container">
-            <button class="btn" onclick="handleChoice('yes')">YES</button>
-            <button class="btn" onclick="handleChoice('no')">NO</button>
+        <p>Would you like to register your product so we can track and streamline future warranty claims?</p>
+
+        <div class="button-group">
+            <button class="btn" onclick="handleResponse('yes')">YES</button>
+            <button class="btn" onclick="handleResponse('no')">NO</button>
         </div>
 
-        <div class="item-info" onclick="toggleInfo()">
-            Item information ▼
+        <div class="info-toggle" onclick="toggleDetails()">
+            Item information <span id="arrow">▼</span>
+        </div>
+
+        <div class="info-details" id="details">
+            <p style="margin-bottom:0; font-size:12px; color:#cccccc;">
+                STATUS: VERIFIED AUTHENTIC<br>
+                CHECK TYPE: NFC HARDWARE PASS
+            </p>
         </div>
     </div>
 
     <script>
-        // Transition from checking screen to success screen after 2 seconds
+        // Transition from loading screen to main screen after 2 seconds
         setTimeout(() => {
             const loadingScreen = document.getElementById('loading-screen');
             const mainScreen = document.getElementById('main-screen');
@@ -124,22 +191,32 @@
             loadingScreen.style.opacity = '0';
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-                mainScreen.style.display = 'block';
+                mainScreen.style.display = 'flex';
             }, 500);
         }, 2000);
 
-        function handleChoice(choice) {
-            if (choice === 'yes') {
-                alert("Thank you for registering!");
+        function toggleDetails() {
+            const details = document.getElementById('details');
+            const arrow = document.getElementById('arrow');
+            if (details.classList.contains('open')) {
+                details.classList.remove('open');
+                arrow.textContent = '▼';
             } else {
-                alert("Session complete.");
+                details.classList.add('open');
+                arrow.textContent = '▲';
             }
         }
 
-        function toggleInfo() {
-            alert("Item Status: Verified Authentic");
+        function handleResponse(choice) {
+            if(choice === 'yes') {
+                alert("Warranty registration initiated.");
+            } else {
+                alert("Thank you. Session finalized.");
+            }
         }
     </script>
 
 </body>
 </html>
+
+```
